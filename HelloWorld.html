@@ -32,28 +32,25 @@ function myMap() {
     zoom: 11,
     mapTypeId: 'terrain'
   });
-  var iconBase = 'https://publicdomainvectors.org/photos/';
+  var iconBase = 'https://i.ya-webdesign.com/images/';
   var icons = {
-  	mountain:{
+    mountain:{
       name: 'volcano',
-      icon: iconBase + 'mountain-15.png',
-			scaledSize: new google.maps.Size(10, 10)
-/*       origin: new google.maps.Point(0,0),
-            anchor: new google.maps.Point(0, 0) */
-      }
+      icon: iconBase + 'volcano-icon-png-3.png',
+      scaledSize: new google.maps.Size(10, 10)
+    }
   };
-   var features = [
-   {
+	
+   var features = [{
      position: new google.maps.LatLng(38.644038, -27.225379),
      type: 'mountain'
-    }
-   ];
+    }];
+  
    features.forEach(function(feature) {
-   	var marker = new google.maps.Marker({
+     var marker = new google.maps.Marker({
     	position: feature.position,
-      icon: icons[feature.type].icon,
-      map: map
-      /* icon: icon */
+      	icon: icons[feature.type].icon,
+     	map: map
     });
    });
 }
