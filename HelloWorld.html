@@ -58,13 +58,43 @@
   <body>
     <div id="map"></div>
     <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 48.365091, lng: -89.292451},
-          zoom: 8
-        });
+var map;
+
+function myMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: 38.722902,
+      lng: -27.213471
+    },
+    zoom: 11,
+    mapTypeId: 'terrain'
+  });
+  var iconBase = 'https://publicdomainvectors.org/photos/';
+  var icons = {
+  	mountain:{
+      name: 'volcano',
+      icon: iconBase + 'mountain-15.png',
+			scaledSize: new google.maps.Size(10, 10)
+/*       origin: new google.maps.Point(0,0),
+            anchor: new google.maps.Point(0, 0) */
       }
+  };
+   var features = [
+   {
+     position: new google.maps.LatLng(38.644038, -27.225379),
+     type: 'mountain'
+    }
+   ];
+   features.forEach(function(feature) {
+   	var marker = new google.maps.Marker({
+    	position: feature.position,
+      icon: icons[feature.type].icon,
+      map: map
+      /* icon: icon */
+    });
+   });
+ 
+}
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKdL5rX1qRWG9kNwd8XQflYtXk2jg-ZhE&callback=initMap"
     async defer></script>
