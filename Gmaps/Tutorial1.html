@@ -3,10 +3,19 @@
   <head>
     <style>
        /* Set the size of the div element that contains the map */
-      #map {
-        height: 600px;  /* The height is 400 pixels */
-        width: 100%;  /* The width is the width of the web page */
-       }
+#map {
+  height: 400px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+  padding: 5px;
+  margin: 10px;
+  border: solid navy;
+  background-color: lightgrey;
+ }
+h3 {
+  font-family: serif;
+  color: navy;
+  text-align: center;
+}
     </style>
   </head>
   <body>
@@ -16,13 +25,13 @@
     <script>
 // Initialize and add the map
 function initMap() {
-  // The location of Uluru
-  var uluru = {lat: -25.344, lng: 131.036};
-  // The map, centered at Uluru
+  // The location of mount brasil
+  var mtbrasil = {lat: 38.645627, lng: -27.229914};
+  // The map, centered at mount brasil
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
+      document.getElementById('map'), {zoom: 10, center: mtbrasil});
+  // The marker, positioned at mount brasil
+  var marker = new google.maps.Marker({position: mtbrasil, map: map});
 }
     </script>
     <!--Load the API from the specified URL
