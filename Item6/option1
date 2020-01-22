@@ -1,0 +1,69 @@
+function initMap() {
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 2,
+    center: {lat: 37.0902, lng: -95.7129}
+  });
+
+  // Create an array of alphabetical characters used to label the markers.
+  var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  // Add some markers to the map.
+  // Note: The code uses the JavaScript Array.prototype.map() method to
+  // create an array of markers based on a given "locations" array.
+  // The map() method here has nothing to do with the Google Maps API.
+  var markers = locations.map(function(location, i) {
+    return new google.maps.Marker({
+      position: location,
+      label: labels[i % labels.length]
+    });
+  });
+
+  // Add a marker clusterer to manage the markers.
+  var markerCluster = new MarkerClusterer(map, markers,
+      {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+}
+var locations = [
+  {lat: 32.646313, lng: -116.147730},
+  {lat: 32.676427, lng: -115.327093},
+  {lat: 32.682369, lng: -115.270623},
+  {lat: 32.490470, lng: -114.800262},
+  {lat: 31.779985, lng: -107.303467},
+  {lat: 31.786989, lng: -106.968384},
+  {lat: 43.152937, lng: -79.043455},
+  {lat: 43.149356, lng: -79.041438},
+  {lat: 43.114843, lng: -79.060407},
+  {lat: 43.098750, lng: -79.060535},
+  {lat: 46.501405, lng: -84.354401},
+  {lat: 46.494788, lng: -84.330368},
+  {lat: 45.781112, lng: -84.756775},
+  {lat: 48.992383, lng: -122.640381},
+  {lat: 48.988779, lng: -122.448120},
+  {lat: 48.999592, lng: -121.393433},
+  {lat: 48.992383, lng: -120.607910},
+  {lat: 48.985174, lng: -118.542480},
+  {lat: 49.003195, lng: -115.735474},
+  {lat: 49.006799, lng: -112.137451},
+  {lat: 49.003195, lng: -106.803589},
+  {lat: 49.000042, lng: -97.492676},
+  {lat: 48.985625, lng: -95.844727},
+  {lat: 48.522062, lng: -93.691406},
+  {lat: 48.142265, lng: -92.065430},
+  {lat: 47.966020, lng: -89.714355},
+  {lat: 55.396272, lng: -130.034180},
+  {lat: 56.733142, lng: -131.857910},
+  {lat: 58.058991, lng: -133.066406},
+  {lat: 60.421988, lng: -140.976563},
+  {lat: 61.151188, lng: -140.976563},
+  {lat: 63.398902, lng: -140.932617},
+  {lat: 65.971088, lng: -140.844727},
+  {lat: 68.030188, lng: -141.020508},
+  {lat: 20.028839, lng: -155.489502},
+  {lat: 21.518239, lng: -157.972412},
+  {lat: 42.259779, lng: -83.122559},
+  {lat: 67.514872, lng: -140.800781},
+  {lat: 28.001677, lng: -99.975586},
+  {lat: 26.595895, lng: -99.052734},
+    
+]
+
