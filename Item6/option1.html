@@ -27,29 +27,29 @@
 
         function initMap() {
 
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 2,
-            center: {lat: 37.0902, lng: -95.7129}
-        });
-
-        // Create an array of alphabetical characters used to label the markers.
-        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
-        var markers = locations.map(function(location, i) {
-            return new google.maps.Marker({
-            position: location,
-            label: labels[i % labels.length]
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 2,
+                center: {lat: 37.0902, lng: -95.7129}
             });
-        });
 
-        // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-        }
+            // Create an array of alphabetical characters used to label the markers.
+            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+            // Add some markers to the map.
+            // Note: The code uses the JavaScript Array.prototype.map() method to
+            // create an array of markers based on a given "locations" array.
+            // The map() method here has nothing to do with the Google Maps API.
+            var markers = locations.map(function(location, i) {
+                return new google.maps.Marker({
+                position: location,
+                label: labels[i % labels.length]
+                });
+            });
+
+            // Add a marker clusterer to manage the markers.
+            var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+            }
         var locations = [
         {lat: 32.646313, lng: -116.147730},
         {lat: 32.676427, lng: -115.327093},
@@ -91,8 +91,9 @@
         {lat: 67.514872, lng: -140.800781},
         {lat: 28.001677, lng: -99.975586},
         {lat: 26.595895, lng: -99.052734},
-            
+
         ]
+        
     </script>
     <script src="https://rylienellis.github.io/geom99/Gmaps/markerclusterer.js">
     <script async defer
