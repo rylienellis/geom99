@@ -18,19 +18,26 @@
   <script>  
     require([
       "esri/Map",
-      "esri/views/MapView",
+      "esri/views/SceneView",
       "esri/layers/FeatureLayer"
-    ], function(Map, MapView, FeatureLayer) {
+    ], function(Map, SceneView, FeatureLayer) {
 
       var map = new Map({
-        basemap: "topo-vector"
+        basemap: "topo-vector",
+        ground: "world-elevation"
       });
 
-      var view = new MapView({
+      var view = new SceneView({
         container: "viewDiv",
-        map: map,	        map: map,
-        center: [-118.80500,34.02700],
-        zoom: 13
+        map: map,
+        camera: {
+          position: {  // observation point
+           x: -118.802563,
+           y: 33.943582,
+           z: 10000 // altitude in meters
+        },
+        tilt: 60
+        }
       });
       
       var trailheadsRenderer = {
