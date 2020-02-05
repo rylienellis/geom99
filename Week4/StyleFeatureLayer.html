@@ -26,11 +26,17 @@
         basemap: "topo-vector"
       });
 
-      var view = new MapView({
+      var view = new SceneView({
         container: "viewDiv",
         map: map,
-        center: [-118.80500,34.02700],
-        zoom: 13
+        camera: {
+          position: {
+            x = -118.80500,
+            y = 34.02700],
+            z = 12000
+          },
+        tilt: 55
+        }
       });
       
       var trailheadsRenderer = {
