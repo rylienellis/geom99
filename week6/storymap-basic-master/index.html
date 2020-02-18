@@ -111,15 +111,7 @@
 
   </script>
   <script type="text/javascript" src="https://jsdev.arcgis.com/3.27/"></script>
-  <script type="text/javascript">
-    
-    
-    
-    
-    
-    
-    
-    
+  <script type="text/javascript">   
     
     require([
       "esri/Map",
@@ -162,10 +154,7 @@
         // i18n, appid, webmap and any custom values defined by the application.
         // In this example we have one called theme.
         myApp.startup(config);
-      }, function (error) {
-        // something went wrong. Let's report it.
-        myApp.reportError(error);
-      });
+      
       // provinces
       var provinces = Layer.fromPortalItem({
         portalItem: {
