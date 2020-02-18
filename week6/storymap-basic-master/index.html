@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <!-- Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <!-- End Responsive -->
+  <!-- Use protocol relative urls that way if the browser is viewing the page via HTTPS the js/css file will be requested using the HTTPS protocol -->
+  <!--
+    To correctly reference your application in search engine:
+     - create and fill out extensively an ArcGIS Online item that link to your final application
+     - edit the following four tags as well as the title tag above on line 4
+  -->
+  <meta name="description" content="This story map was created with the Story Map Basic application in ArcGIS Online.">
+
+  <!-- Facebook sharing -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Story Map Basic" />
+  <meta property="og:description" content="This story map was created with the Story Map Basic application in ArcGIS Online." />
+  <meta property="og:image" content="http://www.arcgis.com/apps/OnePane/storytelling_basic/images/esriGlobeLogow.png" />
+
+  <link rel="stylesheet" href="https://jsdev.arcgis.com/3.27/esri/themes/calcite/dijit/calcite.css">
+  <link rel="stylesheet" href="https://jsdev.arcgis.com/3.27/esri/themes/calcite/esri/esri.css">
+  <!-- Load any application specific styles -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="calcite app-loading">
+  <div class="loading-indicator">
+    <div class="loading-message" id="loading_message"></div>
+  </div>
+  <div id="mainWindow" dojotype="dijit/layout/BorderContainer" data-dojo-props="design:'headline',gutters:false" style="height:100%;width:100%;">
+    <!-- Header Section-->
+    <div id="header" class="bg fg" aria-hidden="true" dojotype="dijit/layout/ContentPane" data-dojo-props="region:'top'">
+      <div id="headerText">
+        <h1 id="title"></h1>
+        <h2 id="subtitle" class="ac"></h2>
+      </div>
+      <div class="socialArea">
+        <div class="linkSocialContainer">
+          <span id="linkContainer" class="ac linkContainer" </span> <span class="shareBtns">
+            <i id="facebook" class="ac shareIcon blackHover share_facebook icon-facebook" tabindex="-1"></i>
+            <i id="twitter" class="ac shareIcon blackHover share_twitter icon-twitter" tabindex="-1"></i>
+            <i id="link" class="ac shareIcon blackHover share_bitly icon-link" tabindex="-1"></i>
+          </span>
+        </div>
+        <table class="logoContainer">
+          <tr>
+            <td class="logoWrapper">
+              <a id="logoLink" class="logoLink" target="_blank" tabindex="-1">
+                <img id="logoImg" class="logoImg" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <!-- Map Section -->
+    <div id="mapDiv" dojotype="dijit/layout/ContentPane" data-dojo-props="region:'center'" dir="ltr">
+      <div id="legendCon" dir="ltr">
+        <div id="legendToggle" class="lbg">
+          <div class="fg" id="legTogText"></div>
+          <div id="legToggleIcon" class="fg icon-down toggle-icon"></div>
+        </div>
+        <div id="legendDiv"></div>
+      </div>
+      <div id="search"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var webgl = location.search.match(/webgl=([\w-]+)/) ? (RegExp.$1).toLowerCase() === "false" ? 0 : 1 : 1;
+    var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+    var dojoConfig = {
+      has: {
+        "esri-featurelayer-webgl": webgl
+      },
+      async: true,
+      parseOnLoad: true,
+      // The locationPath logic below may look confusing but all its doing is
+      // enabling us to load the api from a CDN and load local modules from the correct location.
+      packages: [{
+        name: "application",
+        location: package_path + '/js'
+      }, {
+        name: "config",
+        location: package_path + '/config'
+      }, {
+        name: "arcgis_templates",
+        location: package_path + '/..'
+      }]
+    };
+    // Have to handle a locale parameter before dojo is loaded
+    if (location.search.match(/locale=([\w\-]+)/)) {
+      dojoConfig.locale = RegExp.$1;
+    }
+
+  </script>
+  <script type="text/javascript" src="https://jsdev.arcgis.com/3.27/"></script>
+  <script type="text/javascript">
+    require([
+      "config/templateConfig",
+      "application/template",
+      "application/main",
+      "dijit/layout/BorderContainer",
+      "dijit/layout/ContentPane"
+    ], function (
+      templateConfig,
+      Template,
+      Main
+    ) {
+      // create the template. This will take care of all the logic required for template applications
+      var myTemplate = new Template(templateConfig);
+      // create my main application. Start placing your logic in the main.js file.
+      var myApp = new Main();
+      // start template
+      myTemplate.startup().then(function (config) {
+        // The config object contains the following properties: helper services, (optionally)
+        // i18n, appid, webmap and any custom values defined by the application.
+        // In this example we have one called theme.
+        myApp.startup(config);
+      }, function (error) {
+        // something went wrong. Let's report it.
+        myApp.reportError(error);
+      });
+    });
+
+  </script>
+</body>
+
+</html>
