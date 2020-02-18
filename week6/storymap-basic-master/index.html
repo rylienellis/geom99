@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title></title>
+  <title>Canada for Kids!</title>
   <meta charset="utf-8">
   <!-- Responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -28,6 +28,16 @@
   <link rel="stylesheet" href="https://jsdev.arcgis.com/3.27/esri/themes/calcite/esri/esri.css">
   <!-- Load any application specific styles -->
   <link rel="stylesheet" href="css/main.css">
+   <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.13/"></script>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body class="calcite app-loading">
@@ -102,7 +112,19 @@
   </script>
   <script type="text/javascript" src="https://jsdev.arcgis.com/3.27/"></script>
   <script type="text/javascript">
+    
+    
+    
+    
+    
+    
+    
+    
+    
     require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/Layer",
       "config/templateConfig",
       "application/template",
       "application/main",
@@ -111,12 +133,29 @@
     ], function (
       templateConfig,
       Template,
-      Main
-    ) {
+      Main, Map, MapView, Layer) {
+      
       // create the template. This will take care of all the logic required for template applications
       var myTemplate = new Template(templateConfig);
       // create my main application. Start placing your logic in the main.js file.
       var myApp = new Main();
+  
+      var map = new Map({
+        basemap: "gray"
+      });
+      
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-102.331518,57.891497],
+        zoom: 3
+        
+      function addLayer(layerItemPromise, index) {
+        return layerItemPromise.then(function(layer){
+          map.add(layer, index);
+        });
+      }
+        
       // start template
       myTemplate.startup().then(function (config) {
         // The config object contains the following properties: helper services, (optionally)
@@ -127,9 +166,16 @@
         // something went wrong. Let's report it.
         myApp.reportError(error);
       });
+      // provinces
+      var provinces = Layer.fromPortalItem({
+        portalItem: {
+          id: "e7753e4c23e342e8aa836c6aee55f9b1"
+        }
+      });
+      addLayer(provinces, 2)
     });
-
   </script>
+  <div id="viewDiv"></div>
 </body>
 
 </html>
