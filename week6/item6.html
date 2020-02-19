@@ -19,8 +19,8 @@
     require([
       "esri/Map",
       "esri/views/MapView",
-      "esri/layers/Layer"
-    ], function(Map, MapView, Layer) {
+      "esri/layers/FeatureLayer"
+    ], function(Map, MapView, FeatureLayer) {
 
       var map = new Map({
         basemap: "gray"
@@ -33,15 +33,9 @@
         zoom: 3
       });
       
-      function addLayer(layerItemPromise, index) {
-        return layerItemPromise.then(function(layer){
-          map.add(layer, index);
-        });
-      }
-      
-      // WebApp on AGOL
+      // Web Layer from luna 
       var provinces = new FeatureLayer({
-        url: "https://luna.flemingcollege.ca/arcgis/rest/services/Geom99on/rnellisCanadaPro/MapServer"
+        url: "https://luna.flemingcollege.ca/arcgis/rest/services/Geom99on/rnellisCanadaPro/MapServer/0"
       });
 
       map.add(provinces, 0)
