@@ -25,7 +25,7 @@ define({
   "group": "",
   //Enter the url to the proxy if needed by the application. See the 'Using the proxy page' help topic for details
   //http://developers.arcgis.com/en/javascript/jshelp/ags_proxy.html
-  "proxyurl": "https://luna.flemingcollege.ca/arcgis/rest/services/Geom99on/rnellisCanadaPro/MapServer/0?token=Ahy6jj7JkOz5r43mCQkoFXr3e3Lmvm2tRsiOCJU5YapcBXJzdAIeL9j4K3RG6qCGZ7K9PEa4ivkhsYNh1uTGrnFvEZeDNP6iABHTNjvaRrPKMIGxcGe8fnjKVWG5WQAHNLMhBva57HaBWYeRoHzbeA..",
+  "proxyurl": "https://luna.flemingcollege.ca/arcgis/rest/services/Geom99on/rnellisCanadaPro/MapServer/?token=Ahy6jj7JkOz5r43mCQkoFW28vP4VnG8eVZWwvJFVDNX8MFDpLPH0QzPRSedLSLes1NPYn9F9x4dbAbkns_rAzKDqE6k2biR1PAZ96Z-iLNa2F9aZY7P0wVa3po4FMtyfC55t42aOCZaf3yoB_NONV8WOok78qE649FMXBmS96rs",
   // This is an option added so that developers working with the
   // hosted version of the application can apply custom styles
   // not used in the download version.
