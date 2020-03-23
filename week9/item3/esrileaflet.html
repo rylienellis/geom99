@@ -35,12 +35,12 @@
   <script>
     const map = L.map('map', {
       center: [58.297944, -103.710938],
-      zoom: 10
+      zoom: 3
     });
     L.esri.basemapLayer('Gray').addTo(map);
     
     const CanadaLayer = L.esri.featureLayer({
-      url: 'https://luna.flemingcollege.ca/arcgis/rest/services/Geom99on/rnellisCanadaPro/MapServer/0'
+      url: 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/AcgIncome_OntarioFed_WebGIS_WFL1/FeatureServer/0'
     }).addTo(map);
   </script>
 </body>
