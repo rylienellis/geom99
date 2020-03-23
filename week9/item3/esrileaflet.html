@@ -45,13 +45,13 @@
       precision: 5,
       style: function (feature) {
         if (feature.properties.Income_Class === 'Low') {
-          return { color: #e6e6ff, weight: 2};
+          return { color: '#e6e6ff', weight: 2};
         } else if (feature.properties.Class === 'Middle') {
-          return { color: #9999ff, weight: 2 };
+          return { color: '#9999ff', weight: 2 };
         } else if (feature.properties.Class === 'Upper-Middle') {
           return { color: 'red', weight: 2 };
         } else if (feature.properties.Class === 'Upper') {
-          return { color: #4d4dff, weight: 2 };
+          return { color: '#4d4dff', weight: 2 };
         } else {
           return { color: 'white', weight: 2 };
         }
