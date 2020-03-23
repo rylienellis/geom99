@@ -35,7 +35,7 @@
   <script>
     const map = L.map('map', {
       center: [50.176898, -85.609845],
-      zoom: 7
+      zoom: 5
     });
     L.esri.basemapLayer('Gray').addTo(map);
     
@@ -47,7 +47,7 @@
         if (feature.properties.Income_Class === 'Low') {
           return { color: 'white', weight: 2};
         } else if (feature.properties.Income_Class === 'Middle') {
-          return { color: 'light-blue', weight: 2 };
+          return { color: 'purple', weight: 2 };
         } else if (feature.properties.Income_Class === 'Upper-Middle') {
           return { color: 'blue', weight: 2 };
         } else if (feature.properties.Income_Class === 'Upper') {
