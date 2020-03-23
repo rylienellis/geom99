@@ -34,10 +34,14 @@
   <div id="map"></div>
   <script>
     const map = L.map('map', {
-      center: [37.75, -122.23],
+      center: [58.297944, -103.710938],
       zoom: 10
     });
     L.esri.basemapLayer('Gray').addTo(map);
+    
+    const CanadaLayer = L.esri.featureLayer({
+      url: 'https://luna.flemingcollege.ca/arcgis/rest/services/Geom99on/rnellisCanadaPro/MapServer/0'
+    }).addTo(map);
   </script>
 </body>
 </html>
