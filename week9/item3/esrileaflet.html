@@ -41,6 +41,21 @@
     
     const CanadaLayer = L.esri.featureLayer({
       url: 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/ArcGIS/rest/services/AcgIncome_OntarioFed_WebGIS_WFL1/FeatureServer/0?token=Fz97S_jJw_8TwAZvicJiH4UwISdjVHx0FKscoe6LmYycaoyfc33_9xuMe-YIHJVkUo0EughSakeT0rPI6E3J25ELTzWPL0lkShtQo4S9mFcdDkEF-b4iusji-UblolvaMdJrFd4Vz4kkYFbIAqHXKH8Jg7J7zL0mTIZrwZoW4ltZAfZb6_1Ond1o4nVX8tQ01fuDV0JZxfg1dJKdOywd7Q-x3dbHjO1o1JgqeJRJs7xK7ghoDmlLtkw0g3MjU6Bf2sAmQrZ7JQHz7E9-1NNNfg38oCilsydpdKqv1dNL3Nk.'
+      simplifyFactor: 0.5,
+      precision: 5,
+      style: function (feature) {
+        if (feature.properties.Income_Class === 'Low') {
+          return { color: #e6e6ff, weight: 2};
+        } else if (feature.properties.Class === 'Middle') {
+          return { color: #9999ff, weight: 2 };
+        } else if (feature.properties.Class === 'Upper-Middle') {
+          return { color: 'red', weight: 2 };
+        } else if (feature.properties.Class === 'Upper') {
+          return { color: #4d4dff, weight: 2 };
+        } else {
+          return { color: 'white', weight: 2 };
+        }
+      }
     }).addTo(map);
   </script>
 </body>
