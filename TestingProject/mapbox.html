@@ -7,182 +7,157 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
 <style>
-	body { margin: 0; padding: 0; }
-	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 </style>
 </head>
 <body>
 <style>
+    /* Time slider template: https://docs.mapbox.com/mapbox-gl-js/example/timeline-animation/?utm_medium=sem&utm_source=google&utm_campaign=sem|google|brand|chko-googlesearch-pr01-dynamicsearchcampaign-nb.broad-all-landingpage-search&utm_term=brand&utm_content=chko-googlesearch-pr01-dynamicsearchcampaign-nb.broad-all-landingpage-search&gclid=CjwKCAjwvOHzBRBoEiwA48i6Amgs-mnAWEnVepHPlhsupkTx0BZHkhz2r6KC7ZC88d0wn-IGWATngBoCpW4QAvD_BwE
+    Legend derived from this template: https://docs.mapbox.com/mapbox-gl-js/example/updating-choropleth/ */
     .map-overlay {
-        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        position: absolute;
-        width: 25%;
-        top: 0;
-        left: 0;
-        padding: 10px;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    position: absolute;
+    width: 25%;
+    top: 0;
+    left: 0;
+    padding: 10px;
     }
-
     .map-overlay .map-overlay-inner {
-        background-color: #fff;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        border-radius: 3px;
-        padding: 10px;
-        margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
     }
-
     .map-overlay h2 {
-        line-height: 24px;
-        display: block;
-        margin: 0 0 10px;
+    line-height: 24px;
+    display: block;
+    margin: 0 0 10px;
     }
-
     .map-overlay .legend .bar {
-        height: 10px;
-        width: 100%;
-        background: linear-gradient(to right, #fca107, #7f3121);
+    height: 10px;
+    width: 100%;
     }
-
     .map-overlay input {
-        background-color: transparent;
-        display: inline-block;
-        width: 100%;
-        position: relative;
-        margin: 0;
-        cursor: ew-resize;
+    background-color: transparent;
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    cursor: ew-resize;
+    }
+    .legend div span {
+    border-radius: 50%;
+    display: inline-block;
+    height: 10px;
+    margin-right: 5px;
+    width: 10px;
     }
 </style>
-
 <div id="map"></div>
-
 <div class="map-overlay top">
     <div class="map-overlay-inner">
-        <h2>Average Income in Ontario</h2>
-        <label id="month"></label>
+        <h2>Individual After-Tax Income Patterns in Ontario</h2>
+        <label id="year"></label>
         <input id="slider" type="range" min="0" max="2" step="1" value="0" />
     </div>
     <div class="map-overlay-inner">
         <div id="legend" class="legend">
-            <div class="bar"></div>
-            <div>Income (Low to High)</div>
+            <h4>Income Class</h4>
+            <div><span style="background-color: #63085d"></span>Upper</div>
+            <div><span style="background-color: #a049df"></span>Upper-middle</div>
+            <div><span style="background-color: #9ab5f9"></span>Middle</div>
+            <div><span style="background-color: #cfb5f2"></span>Lower-middle</div>
         </div>
     </div>
 </div>
-
 <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script>
-	mapboxgl.accessToken = 'pk.eyJ1Ijoicm5lbGxpcyIsImEiOiJjazdheGQwZGUxOHUxM2V0Zm9qNnp0MDQ3In0.JMMnDKo-7Tfzw0uLvhUw-g';
+    mapboxgl.accessToken = 'pk.eyJ1IjoibHBsZXNrbyIsImEiOiJjazdnNmFkZ2YwMjd2M2ZtdTd0MnpqMGd4In0.xsh1nBMx5dh089PiwV2aMQ';
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/rnellis/ck8ovyf2j00ii1ipfigjk9ms6',
-        center: [-84.770508, 49.014455],
+        style: 'mapbox://styles/rnellis/ck8p1pi2q0cy51jqnomzti3aa',
+        center: [-85.21, 49.80],
         zoom: 4
     });
-
-    var months = [
+    var years = [
         '2006',
         '2011',
         '2016'
     ];
-
-    function filterBy(month) {
-        var filters = ['==', 'month', month];
-        map.setFilter('earthquake-circles', filters);
-        map.setFilter('earthquake-labels', filters);
-
-        // Set the label to the month
-        document.getElementById('month').textContent = months[month];
+    function filterBy(year) {
+        var filters = ['==', 'year', year];
+        map.setFilter('income-circles', filters);
+        map.setFilter('income-labels', filters);
+        // Set the label to the year
+        document.getElementById('year').textContent = years[year];
     }
-
+    var url = 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/AvgIncomeBase/FeatureServer/0/query?where=Year%3D%272006%27+OR+Year%3D%272011%27+OR+Year%3D%272016%27&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=&returnHiddenFields=false&returnGeometry=true&returnCentroid=false&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=geojson&token=OgVXNE_t4zjNbXii7TyF0aTz8cvY8UKKtHQpfPAzOkc08Xwk7FYBLPE1uCryyW3aXAQrQn0xSZK9wxE5zqAphRQTUM44tomPiu-wzrfZhueYJZAdJ7HOKFujPsK2_G1mDz72orPj5VbyRRVSSqVSbVRvnNyZuN-o1AdX5GlIDxHDbN-Pz-TerOnqNA0JTW-1n2PpeI3lhU3T6hT8aULNKd5VC0inprqEHdAUC7BfCLp9VIwyW3b10fsbK2FGwzt-0guf43MMVybfwQFkr8K-vnvNm1Hrwp-o8TjnW4dfrD4.'
     map.on('load', function() {
-        // Data courtesy of http://earthquake.usgs.gov/
-        // Query for significant earthquakes in 2015 URL request looked like this:
-        // http://earthquake.usgs.gov/fdsnws/event/1/query
-        //    ?format=geojson
-        //    &starttime=2015-01-01
-        //    &endtime=2015-12-31
-        //    &minmagnitude=6'
-        //
-        // Here we're using d3 to help us make the ajax request but you can use
-        // Any request method (library or otherwise) you wish.
-        d3.json(
-            'https://docs.mapbox.com/mapbox-gl-js/assets/significant-earthquakes-2015.geojson',
-            function(err, data) {
-                if (err) throw err;
-
-                // Create a month property value based on time
-                // used to filter against.
-                data.features = data.features.map(function(d) {
-                    d.properties.month = new Date(d.properties.time).getMonth();
-                    return d;
-                });
-
-                map.addSource('earthquakes', {
-                    'type': 'geojson',
-                    data: data
-                });
-
-                map.addLayer({
-                    'id': 'earthquake-circles',
-                    'type': 'circle',
-                    'source': 'earthquakes',
-                    'paint': {
-                        'circle-color': [
-                            'interpolate',
-                            ['linear'],
-                            ['get', 'mag'],
-                            6,
-                            '#FCA107',
-                            8,
-                            '#7F3121'
-                        ],
-                        'circle-opacity': 0.75,
-                        'circle-radius': [
-                            'interpolate',
-                            ['linear'],
-                            ['get', 'mag'],
-                            6,
-                            20,
-                            8,
-                            40
-                        ]
-                    }
-                });
-
-                map.addLayer({
-                    'id': 'earthquake-labels',
-                    'type': 'symbol',
-                    'source': 'earthquakes',
-                    'layout': {
-                        'text-field': [
-                            'concat',
-                            ['to-string', ['get', 'mag']],
-                            'm'
-                        ],
-                        'text-font': [
-                            'Open Sans Bold',
-                            'Arial Unicode MS Bold'
-                        ],
-                        'text-size': 12
-                    },
-                    'paint': {
-                        'text-color': 'rgba(0,0,0,0.5)'
-                    }
-                });
-
-                // Set filter to first month of the year
-                // 0 = January
-                filterBy(0);
-
-                document
-                    .getElementById('slider')
-                    .addEventListener('input', function(e) {
-                        var month = parseInt(e.target.value, 10);
-                        filterBy(month);
-                    });
+        window.setInterval(function() {
+            map.getSource('incomes').setData(url);
+        }, 2000);
+        map.addSource('incomes', {
+            'type': 'geojson',
+            data: url
+        });
+        map.addLayer({
+            'id': 'income-circles',
+            'type': 'fill',
+            'source': 'incomes',
+            'paint': {
+                'circle-color': [
+                    'interpolate',
+                    ['linear'],
+                    ['get', 'mag'],
+                    6,
+                    '#FCA107',
+                    8,
+                    '#7F3121'
+                ],
+                'circle-opacity': 0.75,
+                'circle-radius': [
+                    'interpolate',
+                    ['linear'],
+                    ['get', 'mag'],
+                    6,
+                    20,
+                    8,
+                    40
+                ]
             }
-        );
+        });
+        map.addLayer({
+            'id': 'income-labels',
+            'type': 'symbol',
+            'source': 'incomes',
+            'layout': {
+                'text-field': [
+                    'concat',
+                    ['to-string', ['get', 'mag']],
+                    'm'
+                ],
+                'text-font': [
+                    'Open Sans Bold',
+                    'Arial Unicode MS Bold'
+                ],
+                'text-size': 12
+            },
+            'paint': {
+                'text-color': 'rgba(0,0,0,0.5)'
+            }
+        });
+        // Set filter to first year
+        // 0 = 2006
+        filterBy(0);
+        document
+            .getElementById('slider')
+            .addEventListener('input', function(e) {
+                var year = parseInt(e.target.value, 10);
+                filterBy(year);
+            });
     });
 </script>
-
 </body>
 </html>
