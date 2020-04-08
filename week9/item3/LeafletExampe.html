@@ -1,0 +1,63 @@
+  
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Leaflet Map with a Basemap</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+  <!-- Load Leaflet from CDN-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>  
+
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js"
+    integrity="sha512-cMQ5e58BDuu1pr9BQ/eGRn6HaR6Olh0ofcHFWe5XesdCITVuSBiBZZbhCijBe5ya238f/zMMRYIMIIg1jxv4sQ=="
+    crossorigin=""></script>
+
+  <style>
+    html,
+    body,
+    #map {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+    const map = L.map('map', {
+      center: [50.176898, -85.609845],
+      zoom: 5
+    });
+    L.esri.basemapLayer('Gray').addTo(map);
+    
+    const CanadaLayer = L.esri.featureLayer({
+      url: 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/AcgIncome_OntarioFed_WebGIS_WFL1/FeatureServer/2?token=on3q4FF39DtlmOCJZ-UXSKyOt-t-VAzwi8LBxBvFUwzRpKrd7BcNPZun1D-SazoURmO7JIN7bgnOwNjkrHuMf2eJ4zFF6FKVMAcastqQY2_kll499S7A4dNPBL5LAiSRESD9MY4s2ag1Vzdxssg513Ix1gurZHoNzG-YNlW24z6lL9Yjs8vriW0i-ngFdNdIIX5bKD8GDHdJN5m1U46LLpdtJS3cdlOKtFx7DFlwP0TtRXKOow46n2Nbizb6LKkZdbcx5MeqedZ7sOZDVbe9g8JdH5cVkSt4oFHeEaKBGj0.',
+      precision: 5,
+      style: function (feature) {
+        if (feature.properties.Income_Class === 'Low') {
+          return { color: 'white'};
+        } else if (feature.properties.Income_Class === 'Middle') {
+          return { color: 'purple'};
+        } else if (feature.properties.Income_Class === 'Upper-middle') {
+          return { color: 'blue'};
+        } else if (feature.properties.Income_Class === 'Upper') {
+          return { color: 'navy'};
+        } else {
+          return { color: 'red'};
+        }
+      }   
+      
+    }).addTo(map);
+  </script>
+</body>
+</html>
