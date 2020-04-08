@@ -40,7 +40,7 @@
     L.esri.basemapLayer('Gray').addTo(map);
     
     const CanadaLayer = L.esri.featureLayer({
-      url: 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/ArcGIS/rest/services/AcgIncome_OntarioFed_WebGIS_WFL1/FeatureServer/0?token=Fz97S_jJw_8TwAZvicJiH4UwISdjVHx0FKscoe6LmYycaoyfc33_9xuMe-YIHJVkUo0EughSakeT0rPI6E3J25ELTzWPL0lkShtQo4S9mFcdDkEF-b4iusji-UblolvaMdJrFd4Vz4kkYFbIAqHXKH8Jg7J7zL0mTIZrwZoW4ltZAfZb6_1Ond1o4nVX8tQ01fuDV0JZxfg1dJKdOywd7Q-x3dbHjO1o1JgqeJRJs7xK7ghoDmlLtkw0g3MjU6Bf2sAmQrZ7JQHz7E9-1NNNfg38oCilsydpdKqv1dNL3Nk.',
+      url: 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/AvgIncome_06_11_16/FeatureServer/0?token=DG_DR7to1V4pbrg3UsxCB7Eom1UmB3lphl4QQeeTAIGyWWYJ10IWNu55t3yaNrqe0o3xjnycAr4RnarLoKHztMfGgnteFEIHi_-G8POi7RWyCNXGrUAHW3fVTE4f-cpIlRkeMD5FEOn2fMMrId42yAQW_Hz_HRA88qE6bTvY7PylToicKTRVS0HlYybQSQGt4bCcY8jyuxS6BXiPmnhG-McutOj07R3_PRiCN4cgm1Ewbw3e4LxM8G4eaxC4H_0alJd9u8SvvdK4yChM3D9RUXa1VA2QUUkxnBADMy5Y89g.',
       precision: 5,
       style: function (feature) {
         if (feature.properties.Income_Class === 'Low') {
