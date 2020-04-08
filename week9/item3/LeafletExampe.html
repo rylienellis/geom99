@@ -41,7 +41,7 @@
     L.esri.basemapLayer('Gray').addTo(map);
     
     const CanadaLayer = L.esri.featureLayer({
-      url: 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/AcgIncome_OntarioFed_WebGIS_WFL1/FeatureServer/2?token=on3q4FF39DtlmOCJZ-UXSKyOt-t-VAzwi8LBxBvFUwzRpKrd7BcNPZun1D-SazoURmO7JIN7bgnOwNjkrHuMf2eJ4zFF6FKVMAcastqQY2_kll499S7A4dNPBL5LAiSRESD9MY4s2ag1Vzdxssg513Ix1gurZHoNzG-YNlW24z6lL9Yjs8vriW0i-ngFdNdIIX5bKD8GDHdJN5m1U46LLpdtJS3cdlOKtFx7DFlwP0TtRXKOow46n2Nbizb6LKkZdbcx5MeqedZ7sOZDVbe9g8JdH5cVkSt4oFHeEaKBGj0.',
+      url: 'https://rylienellis.github.io/geom99/week9/item3/Leaflet_AvgIncome2006.json',
       precision: 5,
       style: function (feature) {
         if (feature.properties.Income_Class === 'Low') {
