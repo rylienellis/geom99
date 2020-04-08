@@ -18,6 +18,8 @@
   <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js"
     integrity="sha512-cMQ5e58BDuu1pr9BQ/eGRn6HaR6Olh0ofcHFWe5XesdCITVuSBiBZZbhCijBe5ya238f/zMMRYIMIIg1jxv4sQ=="
     crossorigin=""></script>
+  
+  <script src="https://rylienellis.github.io/geom99/week9/item3/Leaflet_AvgIncome2006.json"></script>
 
   <style>
     html,
@@ -58,6 +60,13 @@
       }   
       
     }).addTo(map);
+
+       
+      var  = new L.LayerGroup();
+      L.geoJson("https://rylienellis.github.io/geom99/week9/item3/Leaflet_AvgIncome2006.json").addTo(map);
+
+    </script>
+      
   </script>
 </body>
 </html>
